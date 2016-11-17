@@ -18,6 +18,8 @@ var AnswerOption = [ ["Jeremy Renner", "Ving Rhames", "Simon Pegg", "Daniel Crai
 //create an array for correct answer:
 var corrAns = ["B","C","C","A","C","C"];
 
+var images = ["MI.gif", "LR.gif", "strange.gif", "FF7.gif", "BB.gif", "CA.gif"];
+
 //create the same array with different variables to push content back to empty array later
 var questions2=["Besides Tom Cruise, who is the only actor appear in all five 'Mission:Impossible' movies?",
 				 "In which time period do 'The Lord of the Rings' and 'The hobbits' take place?",
@@ -35,12 +37,15 @@ var AnswerOption2=[ ["Jeremy Renner", "Ving Rhames", "Simon Pegg", "Daniel Craig
 					];
 var corrAns2=["B","C","C","A","C","C"];
 
+var images2 = ["MI.gif", "LR.gif", "strange.gif", "FF7.gif", "BB.gif", "CA.gif"];
+
+
 //set a variable for the timer counting down from 60s: 
 var time = 30;
 
 //activate the timer:
 timer();
-
+//hiddenBtn is hid.
 $("#hiddenBtn").hide();
 
 
@@ -81,6 +86,7 @@ function decrement(){
 		questions.splice(ran, 1);
 		AnswerOption.splice(ran, 1);
 		corrAns.splice(ran, 1);
+		images.splice(ran,1);
 		};
 };
 function resetgame(){
@@ -109,9 +115,13 @@ function resetgame(){
 
 //create reset for the game on the situation when the incorrect answer was entered or time up!
 function reset() {
+	$("#quest").show();
+	$("#button").show();
+	$("#question").empty();
 	questions.splice(ran, 1);
 	AnswerOption.splice(ran, 1);
 	corrAns.splice(ran, 1);
+	images.splice(ran,1);
 
 	ran = Math.floor(Math.random()*questions.length);
 
@@ -121,7 +131,7 @@ function reset() {
 		$("#rightwrong").hide();
 		$("#quest").hide();
 		$("#button").hide();
-		$("#question").append("<div><strong>Fantastic Job!</strong></div>"
+		$("#question").html("<div><strong>Fantastic Job!</strong></div>"
 						+"<div>Your result is:</div>"
 						+"<div>Number of correct answer:"+correct+"</div>"
 						+"<div>Number of incorrect answer:"+incorrect+"</div");
@@ -130,6 +140,7 @@ function reset() {
 			questions.push(questions2[i]);
 			AnswerOption.push(AnswerOption2[i]);
 			corrAns.push(corrAns2[i]);
+			images.push(images2[i]);
 			}
 		$("#hiddenBtn").on("click", function(){
 				resetgame();
@@ -137,6 +148,7 @@ function reset() {
 		console.log(corrAns);
 		console.log(questions);
 		console.log(AnswerOption);
+		console.log(images);
 		return;
 	};
 
@@ -150,79 +162,67 @@ function reset() {
 	
 };	
 
+//Correct answer clicked and display the correct message and image
+	function CorrImage() {
+		correct++;
+		$("#quest").hide();
+		$("#button").hide();
+		$("#correct").html("correct:" + correct);
+		$("#question").html("<div>You are Correct!</div>" + "<div>" + "<img src='assets/images/"+ images[ran] + "' width='400' height='300'>" +"</div>");
+		setTimeout(reset, 3000);
+		time=30;
+		}
+
+//Incorrect answer clicked and alert user that the answer is incorrect
+	function IncorrImage() {
+		incorrect++;
+		$("#quest").hide();
+		$("#button").hide();
+		$("#question").html("<div>Sorry Incorrect!</div>" + "<div>" + "<img src='assets/images/ultron.gif' width='400' height='300'>" + "</div>");
+		$("#incorrect").html("incorrect:" + incorrect);
+		setTimeout(reset, 3000);
+		time =30;
+	}
+
 //on click button to choose the answer
 	$("#A").on("click",function(){
 		if (corrAns[ran]=="A") {
-			correct++;
-			$("#correct").html("correct:" + correct);
-			alert ("You are correct!");
-			setTimeout(reset(), 1000)
-			time =30;
+			CorrImage();
 		}
 		else { 
-			alert("Sorry, incorrect!");
-			incorrect++;
-			$("#incorrect").html("incorrect:" + incorrect);
-			reset()
-			time =30;
+			IncorrImage();
 
 		}
 	});
 
 	$("#B").on("click",function(){
 		if (corrAns[ran]=="B") {
-			correct++;
-			$("#correct").html("correct:" + correct);
-			alert ("You are correct!");
-			setTimeout(reset(), 1000)
-			time =30;
+			CorrImage();
 
 		}
 		else { 
-			alert("Sorry, incorrect!");
-			incorrect++;
-			$("#incorrect").html("incorrect:" + incorrect);
-			reset();
-			time =30;
-
+			IncorrImage();
 		}
 	});
 
 	$("#C").on("click",function(){
 		if (corrAns[ran]=="C") {
-			correct++;
-			$("#correct").html("correct:" + correct);
-			alert ("You are correct!");
-			setTimeout(reset(), 1000)
-			time =30;
-
+			CorrImage();
+			
 		}
 		else { 
-			alert("Sorry, incorrect!");
-			incorrect++;
-			$("#incorrect").html("incorrect:" + incorrect);
-			reset();
-			time =30;
+			IncorrImage();
 
 		}
 	});
 
 	$("#D").on("click",function(){
 		if (corrAns[ran]=="D") {
-			correct++;
-			$("#correct").html("correct:" + correct);
-			alert ("You are correct!");
-			setTimeout(reset(), 1000)
-			time =30;
+			CorrImage();
 
 		}
 		else { 
-			alert("Sorry, incorrect!");
-			incorrect++;
-			$("#incorrect").html("incorrect:" + incorrect);
-			reset();
-			time =30;
-
+			IncorrImage();
 		}
 	});
 });
