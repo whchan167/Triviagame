@@ -78,11 +78,12 @@ function decrement(){
 	$("#timeclock").html("<h3> Seconds left:" + "<hr>"+ "00:" + time + "s"+ "</h3>");
 //if time up, alert user. Reset game and add incorrect count	
 	if (time === 0){
+		stop();
 		alert("Time Up! Please try again");
 		incorrect++;
 		$("#incorrect").html("incorrect:" + incorrect);
 		time = 30;
-		setTimeout(reset, 1000);
+		reset();
 		questions.splice(ran, 1);
 		AnswerOption.splice(ran, 1);
 		corrAns.splice(ran, 1);
@@ -115,6 +116,7 @@ function resetgame(){
 
 //create reset for the game on the situation when the incorrect answer was entered or time up!
 function reset() {
+	timer();
 	$("#quest").show();
 	$("#button").show();
 	$("#question").empty();
@@ -145,10 +147,6 @@ function reset() {
 		$("#hiddenBtn").on("click", function(){
 				resetgame();
 		});
-		console.log(corrAns);
-		console.log(questions);
-		console.log(AnswerOption);
-		console.log(images);
 		return;
 	};
 
@@ -158,23 +156,23 @@ function reset() {
 	$("#B").html(AnswerOption[ran][1]);
 	$("#C").html(AnswerOption[ran][2]);
 	$("#D").html(AnswerOption[ran][3]);
-	console.log(ran)
-	
-};	
+	};	
 
 //Correct answer clicked and display the correct message and image
 	function CorrImage() {
+		stop();
 		correct++;
 		$("#quest").hide();
 		$("#button").hide();
 		$("#correct").html("correct:" + correct);
 		$("#question").html("<div>You are Correct!</div>" + "<div>" + "<img src='assets/images/"+ images[ran] + "' width='400' height='300'>" +"</div>");
 		setTimeout(reset, 3000);
-		time=30;
+		time = 30;
 		}
 
 //Incorrect answer clicked and alert user that the answer is incorrect
 	function IncorrImage() {
+		stop();
 		incorrect++;
 		$("#quest").hide();
 		$("#button").hide();
