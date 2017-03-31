@@ -1,11 +1,10 @@
 # Triviagame
 
-This movie trivia game is to test the player's movie knowledge. Total of   
+This movie trivia game is to test the player's movie knowledge. Total of six questions will be asked in this game and four choices will be given in each question. If the player selects the correct answer, the short movie clip will be displayed.
+If the answer is incorrect or the player is running out of time, the Ultron will be appeared.
 
-If the player selects the correct answer, show a screen congratulating them for choosing the right option. After a few seconds, display the next question -- do this without user input.
+At the end of the game, the number of correct answers and incorrect answers will be shown on the screen. 
 
-The scenario is similar for wrong answers and time-outs.
+The player can choose whether to restart the game.
 
-If the player runs out of time, tell the player that time's up and display the correct answer. Wait a few seconds, then show the next question.
-If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.
-On the final screen, show the number of correct answers, incorrect answers, and an option to restart the game (without reloading the page).
+Have fun to play!
